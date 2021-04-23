@@ -1,0 +1,672 @@
+1. Which two declation prevent the overriding of a method?(choose 2) 
+a. final void methoda() 
+b. void final methoda() 
+c. static void methoda()
+d. static final void methoda() 
+e. final abstract void methoda() 
+정답 : a,d
+final 항상 함수명 앞에는 리턴형
+
+2. Which declaration prevents creating a subclass of an outer class?
+a. static class FooBar()
+b. private class FooBar()
+c. abstract class FooBar()
+d. final public FooBar()
+e. final abstract FooBar()
+정답 : d
+
+
+4.
+calss Super{
+    public float getNum(){return 3.0f;}
+}
+public class Sub extends Super{
+    //point here
+} 
+
+a. public float getNum(){ return 4.f;}
+b. public void getNum(){return 4.0f;}
+c. public void getNum(double d){};
+d. public double getNum(float d){ return 4.0d;}
+정답 : a,c,d
+
+
+3.
+public class Test{
+    public int aMethod(){
+        static int i=0;
+        i++;
+        return i;
+    }
+
+    public static void main(String[] args){
+        Test test = new Test();
+        test.aMethod();
+        int j = test.aMethod();
+        System.out.println(j);
+    } 
+} 
+
+what result? 
+
+a. compile will fail
+b. compile will success and print "0"
+c. compile will success and print "1"
+d. compile will success and print "2"
+
+정답 : a
+static 변수가 들어가려면 메서드도 static
+
+
+
+4. 
+public class Foo{
+    static String s;
+    public static void main(String [] args){
+        System.out.println("s= " +s);
+    } 
+}
+
+a. The code compiles and "s = " is printed
+b. The code compiles and "s = null" is printed
+c. The code does not compile because Strings is not initialized
+d. The code does not compile because Strings can not be referenced
+e. The code compiles but a NullPointerException is throw when to String is called
+정답 : b
+
+5. 
+public class Foo{
+    public static void main(String args[]){
+        String s;
+        System.out.println("s = " + s);
+    } 
+}결과는? 
+a. code does not compile because String s is not initialized
+b. code compile and "s = " is printed
+c. code compile and "s = null" is printed
+d. code compiles, but a NullpointException
+
+
+정답 : a 
+지역변수는 String null을 자동으로 넣지 않는다.
+
+
+6.
+public class ReturnIt{
+    returntype method A(byte x, double y){
+        return (short)x/y*2;
+    }
+}
+
+a. int 
+b. byte 
+c. long 
+d. short 
+e. float 
+f. double
+
+
+정답 : f
+
+
+7.
+1: public class ReturnIt{
+2:     returnType methodA(byte x, double y){ 
+3:         return (long)x/y*2;
+4:    }
+5:}
+
+What is the valid returnType for methodA in line 2?
+
+a. int 
+b. byte 
+c. long 
+d. short 
+e. float 
+f. double
+
+정답 : f
+
+
+
+8.
+1: abstract class AbstractIt{
+2:     abstract float getFloat();
+3: }
+4: public class AbstactTest extends AbstractIt{
+5:     private float f1 = 1.0f;
+6:     private float getFloat() { return f;}
+7:} 
+
+what result??
+
+a. compile will success
+b. An error at line 6 cause compile to fail
+c. An error at line 4 cause compile to fail
+d. An error at line 2 cause compile to fail
+
+접근제한자는 같거나 더 커야한다.
+
+
+정답 : b
+
+
+
+9.
+public class Foo{
+    public static void main(String[] args){
+        try{ return;}
+        finally { System.out.println("Finally"); }
+    }
+} 
+
+what result?
+
+a. Print nothing
+b. Print "Finally"
+c. Not compiled and will Exception thrown
+d. Not compile because catch block missing
+
+
+
+
+정답 : b
+
+
+10.
+public class Test {
+    public static void main(String [] args){ 
+        try{ System.exit(0);}
+        finally{  System.out.println("Finally");}
+    }
+} 
+
+What is the result?
+
+a. The program runs and prints nothing
+b. The program runs and prints "Finally"
+c. The code compiles but an exception is thrown at runtime
+d. The code code will not compile because the catch block is missing
+
+
+
+
+정답 : a  
+
+
+
+11.
+public static String output = "";
+
+public static void foo(int i){
+    try
+   {
+        if( i == 1 )
+            throw new Exception();
+        output += "1";
+    }
+    catch(Exception e)
+    {
+        output += "2";
+        return;
+    }
+    finally
+    { 
+        output += "3";
+    }
+    output + = "4";
+}
+
+public static void main(String args[]){
+    foo(0);	//134
+    foo(1); //23
+ // point y
+} 
+
+point y 이 시점에서의 output variable의 value값은? (객관식)
+
+
+
+
+정답 : 13423
+
+
+
+
+
+12.
+int i = 1;
+int j = 0;
+
+switch(i){
+  case 2 : j+=6;
+  case 4 : j+=1;
+  default : j+=2;
+  case 0 : j+=4;
+} 
+//point x
+
+point x 이부분에서의 j값은? (객관식)
+
+
+
+
+정답 : 6
+
+
+
+
+
+
+13
+public class Test{
+    public static void main(String[] args){
+        String foo = args[1];
+        String bar = args[2];
+        String baz = args[3];
+    }
+} 
+
+shell command : java Test red green blue
+
+
+
+정답 : ArrayIndexOutOfBoundsException 발생.
+
+
+
+
+
+14. 
+String foo = "blue";
+boolean[] bar = new boolean[1];
+if(bar[0]) 
+    foo="green";
+ 
+What is the result?
+
+a. foo has the value of ""
+b. foo has the value of null
+c. foo has the value of "blue"
+d. foo has the value of "green"
+e. An Exception is thrown
+f. The code will not compile
+
+
+
+
+정답 : c
+
+
+
+15 
+int index = 1;
+String[] test = new String[3];     
+String[] foo = test[index];
+// String foo = test[index];
+what is the result?
+
+a. foo has the value ""
+b. foo has the value null
+c. An exception is thrown
+d. The code will not compile
+
+
+
+
+정답 : d 
+
+
+
+
+
+
+
+
+16.
+public class Test{
+    private static int j = 0;
+    public static boolean methodB(int k){
+        j += k;
+        return true;
+    }
+
+    public static void methodA(int i){
+        boolean b;
+        b = i < 10 | methodB(4);
+        b = i < 10 || methodB(4);
+    }
+
+    public static void main(String[] args){
+        methodA(0);
+        System.out.println(j);
+    }
+}
+
+What result?
+
+a. print "0" 
+b. print "4" 
+c. print "8"
+d. print "12" 
+e. The code dose not compile
+ 
+
+
+
+정답 : b
+
+
+
+
+
+17.
+public class MethodOver{
+    public void setVar(int a, int b, float c);
+}
+
+Which two overload the setVar method ? (choose two)
+
+a. private void setVar(int a, float c, int b);
+b. protected void setVar(int a, int b, float c);              
+c. public int setVar(int a, float c, int b)return a;
+d. public int setVar(int a, int b, float c)return a;
+e. protected final setVar(int a, int b, float c)return c;
+ 
+
+
+
+정답 : a,c 
+
+
+
+
+
+18. 
+int index = 1;
+boolean[] test = new boolean[3];
+boolean foo = test[index];
+ 
+What is correct?
+
+a. foo has the value of
+b. foo has the value of null
+c. foo has the value of true
+d. foo has the value of false
+e. Exception thrown
+
+
+
+
+정답 : d
+
+
+
+
+
+
+19. What is the output?
+class Super {
+    public Integer getLength()  { return new Integer(4);}
+}
+
+public class Sub extends Super{
+    public Long getLength()  { return new Long(5);}
+
+    public static void main(String [] args) {
+        Super super1 = new Super();
+        Sub sub = new Sub();
+        System.out.println(super1.getLength().toString() + "/" +sub.getLength().toString());
+    }
+}
+
+
+
+
+정답 : 컴파일 에러(오버라이딩을 잘못함)
+
+
+
+
+20.Which declaration prevent creating a SubClass of a OuterClass?
+
+a. static class FooBar
+b. private class FooBar
+c. abstract class FooBar
+d. final public class FooBar
+e. final abstract class FooBar
+ 
+
+
+
+정답 : d
+
+
+
+21. 
+public class Foo{
+    public static int main(String[] args){
+        System.out.println("Hello World");
+        return;
+    }
+}
+
+What is result?
+
+a. An exception
+b. The code not compile
+c. An exception is thrown
+
+
+
+
+정답 : b  
+
+
+
+22. 
+public class Foo {
+    public static int main(String args[]) {
+        System.out.println("Hello World");
+        return 0;
+    }
+}
+
+What's the result?
+
+a. An exception is thrown
+b. The code does not compile
+c. "Hello World" is printed to the terminal
+d. The program exits without printing anything
+
+
+
+
+정답 : a
+
+
+
+
+
+
+23. 
+abstract class A{
+abstract methodA();
+abstract methodB(){
+....
+....
+}
+}
+
+compile이 제대로 수행되려면(독립적으로 수행되었을때) ?
+
+a. methodA 에 abstract 를 제거
+b. methodB 에 abstract 를 제거
+c. methodB의 {...}를 없애고 ;로 대체
+d. class 를 interface로 고치고 methodB를 제거한다.
+e. class의 abstract를 없앤다.
+
+
+
+
+정답 :  b,c,d
+
+
+
+24. 
+public class MethodOver{
+    private int x,y;
+    private float z;
+    public void setVar(int a, int b, float c){
+        x=a;
+        y=b;
+        z=c;
+    }
+} 
+ 
+which two overload the setVar method?(choose two)
+ 
+a. void setVar(int a, int b, float c){
+        x=a;
+        y=b;
+        z=c;
+    }
+b. public void setVar(int a, float c, int b){
+        setVar(a,b,c);
+    }
+c. public void setVar(int a, float c, int b){
+        this(a,b,c);
+    }
+d. public void setVar(int a, float b){
+        x=a;
+        y=b;
+    }
+e. public void setVar(int ax, int by, float cz){
+        x=ax;
+        y=by;
+        z=cz;
+    }
+
+
+
+
+정답 : b,d
+
+
+
+
+
+
+ 
+25.
+int index = 1;
+int[] foo = new int[3];
+int bar = foo[index];
+int baz = bar[index];
+
+what result?
+
+a. baz has a value of 0
+b. baz has a value of 1
+c. baz has a value of 2
+d. An Exception thrown
+e. The code will not compile
+
+
+
+
+정답 : e
+
+
+
+26. 
+public class Example{
+    int x, z;
+    float y;
+
+    public Example(int a, int b){
+        //do a lot of things
+        x = a;
+        z = b;
+    }
+
+    public Example(int a, int b, float c){
+        //do everything that the two-argument
+        //version do constructor does
+        //including assign
+        y = c;
+    }
+} 
+
+most concise way to code at comment parts in three argumet-constructor?(주관식)
+
+
+
+
+정답 :  this(a, b);   
+      
+ 
+ 
+
+27.(주관식)
+
+String s="Hello";
+s=s.toLowerCase() + " there";
+System.out.println(s + " my friend");
+
+출력 결과는 ?
+
+
+
+
+정답 : hello there my friend
+
+
+
+
+
+
+28. You try to get "Test2". which value of variable x is correct?
+
+if(x>4)
+    System.out.println("Test1");
+else if(x>9)
+    System.out.println("Test2");
+else
+    System.out.println("Test3");
+ 
+a. x>4
+b. x>9
+c. 0<=x<=4
+d. less then 0
+e. none
+
+
+
+
+정답 : e
+
+
+
+
+29. What is result? (주관식)
+public class Test{ 
+
+    public static void main(String args[])
+    {
+        String s="base";
+
+        s.concat("home");
+        s.replace('a','e');
+        s+="ball";
+
+        System.out.println(s);
+    }
+}
+
+
+
+
+정답 : baseball
+
+
