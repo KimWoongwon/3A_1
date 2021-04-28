@@ -1,28 +1,3 @@
-//-----------------------------------------------------------------------------
-// File: Matrices.cpp
-//
-// Desc: Now that we know how to create a device and render some 2D vertices,
-//       this tutorial goes the next step and renders 3D geometry. To deal with
-//       3D geometry we need to introduce the use of 4x4 matrices to transform
-//       the geometry with translations, rotations, scaling, and setting up our
-//       camera.
-//
-//       Geometry is defined in model space. We can move it (translation),
-//       rotate it (rotation), or stretch it (scaling) using a world transform.
-//       The geometry is then said to be in world space. Next, we need to
-//       position the camera, or eye point, somewhere to look at the geometry.
-//       Another transform, via the view matrix, is used, to position and
-//       rotate our view. With the geometry then in view space, our last
-//       transform is the projection transform, which "projects" the 3D scene
-//       into our 2D viewport.
-//
-//       Note that in this tutorial, we are introducing the use of D3DX, which
-//       is a set of helper utilities for D3D. In this case, we are using some
-//       of D3DX's useful matrix initialization functions. To use D3DX, simply
-//       include <d3dx9.h> and link with d3dx9.lib.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved.
-//-----------------------------------------------------------------------------
 #include <Windows.h>
 #include <mmsystem.h>
 #include <d3dx9.h>
@@ -106,9 +81,9 @@ HRESULT InitGeometry()
 
     CUSTOMVERTEX g_Vertices_02[] =
     {
-        {  -1.0f, 2.0f, 0.0f, 0xffff0000, },
-        {  1.0f, 2.0f, 0.0f, 0xff0000ff, },
-        {  0.0f, 4.0f, 0.0f, 0xffffffff, },
+        {  1.0f,-1.0f, 0.0f, 0xffff0000, },
+        {  3.0f,-1.0f, 0.0f, 0xff0000ff, },
+        {  2.0f, 1.0f, 0.0f, 0xffffffff, },
     };
 
     // Create the vertex buffer.
@@ -162,19 +137,7 @@ VOID Cleanup()
 }
 
 
-//void convert_to_matrix(D3DXMATRIXA16* ma, const CUSTOMVERTEX* cv)
-//{
-//    ma->_11 = cv[0].x;    ma->_12 = cv[0].y;    ma->_13 = cv[0].z;
-//    ma->_21 = cv[1].x;    ma->_22 = cv[1].y;    ma->_23 = cv[1].z;
-//    ma->_31 = cv[2].x;    ma->_32 = cv[2].y;    ma->_33 = cv[2].z;
-//}
-//
-//void convert_to_customvertex(CUSTOMVERTEX* _cv , const D3DXMATRIXA16* ma)
-//{
-//    _cv[0].x = ma->_11;    _cv[0].y = ma->_12;    _cv[0].z = ma->_13;
-//    _cv[1].x = ma->_21;    _cv[1].y = ma->_22;    _cv[1].z = ma->_23;
-//    _cv[2].x = ma->_31;    _cv[2].y = ma->_32;    _cv[2].z = ma->_33;
-//}
+
 
 //-----------------------------------------------------------------------------
 // Name: SetupMatrices()
@@ -249,14 +212,6 @@ VOID Render()
         g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
         g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 1);
 
-
-        // End the scene
-        g_pd3dDevice->EndScene();
-    }
-
-    if (SUCCEEDED(g_pd3dDevice->BeginScene()))
-    {
-        // Setup the world, view, and projection matrices
         SetupMatricesG2();
 
         g_pd3dDevice->SetStreamSource(0, g_pVB_02, 0, sizeof(CUSTOMVERTEX));
