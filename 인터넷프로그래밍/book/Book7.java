@@ -1,21 +1,27 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
-public class Book7 extends JFrame  
+public class Book7 extends JFrame implements ActionListener
 {
 	JLabel la1,la2,la3,la4; 
 	JRadioButton cb1,cb2,cb3;
 	JComboBox<String> c;
 	JList<String> li; 
 	JButton b1;
-	String id;
+	String id,j,t;
 	
-	Book7(String id)
+	Vector<String> v = new Vector<String>();
+	
+	Book7(String id, String j, String t, String d)
 	{
 		super(id+"님");
 		
-		this.id=id;
+		this.id=id; this.j=j; this.t=t;
+		
+		String[] data = {"               ","    ","    "};
+		li=new JList<String>(data);
 		
 		c=new JComboBox<String>();
 		c.addItem("선택");
@@ -23,22 +29,36 @@ public class Book7 extends JFrame
 		c.addItem("영화");
 		c.addItem("만화");
 		
-		String[] data = {"               ","    ","    "};
-		li=new JList<String>(data);
+		c.setSelectedItem(j);
+		v = new Db().find(j);
+		li.setListData(v);
+		li.setSelectedValue(t, false);
 		
-		la1=new JLabel("대여하기                ");
+		c.addItemListener(new Ck());
+		 
+		
+		
+		la1=new JLabel("대여하기");
 		la2=new JLabel("책장르");
 		la3=new JLabel("책선택");
-		la4=new JLabel("대여기간                  "); 
+		la4=new JLabel("대여기간"); 
 		
-		cb1= new JRadioButton("3일", true);
+		cb1= new JRadioButton("3일");
 		cb2= new JRadioButton("5일");
 		cb3= new JRadioButton("7일");
+		
+		if(d.equals("3"))
+			cb1.setSelected(true);
+		else if(d.equals("5"))
+			cb2.setSelected(true);
+		else
+			cb3.setSelected(true);
 		
 		ButtonGroup p =new ButtonGroup();
 		p.add(cb1); p.add(cb2);p.add(cb3);
 		
 		b1=new JButton("확인");
+		b1.addActionListener(this);
 		
 		JPanel p1=new JPanel(); p1.setLayout(new FlowLayout());
 		p1.add(la1);
@@ -70,10 +90,56 @@ public class Book7 extends JFrame
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(400,300);
 		this.setVisible(true); //무조건 보여줘라
+		
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if(li.getSelectedIndex() != -1)
+		{
+			String jang = (String)c.getSelectedItem();
+			String title = (String)li.getSelectedValue();
+			String day;
+			if(cb1.isSelected())
+				day = "3";
+			else if(cb2.isSelected())
+				day = "5";
+			else
+				day = "7";
+			
+			new Book6(id, jang, title, day);
+			System.out.println("send to book6 : " +id+","+jang+","+title+","+day);
+			this.setVisible(false);
+		}
+		
+	}
+	
+	class Ck implements ItemListener
+	{
+		@Override
+		public void itemStateChanged(ItemEvent e)
+		{
+			String m = (String)c.getSelectedItem();
+			if(!m.equals("선택"))
+			{
+				v.clear();
+				v = new Db().find(j);
+				li.setListData(v);
+			}
+			else
+			{
+				v.clear();
+				String[] data = {"               ","    ","    "};
+				li.setListData(data);
+			}
+		}
+	}
+	
+	
 	public static void main(String[] args) 
 	{
-		new Book7("test");
+		
 	}//main
 
 }//Book5

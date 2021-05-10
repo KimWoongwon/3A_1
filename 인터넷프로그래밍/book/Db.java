@@ -7,7 +7,7 @@ public class Db
 	String dbDriver ="com.mysql.cj.jdbc.Driver";  
 	String dbUrl    = "jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8 & serverTimezone=UTC";
 	String dbId     = "root";
-	String dbPw     = "1234";
+	String dbPw     = "Rladnddnjs97!";
 	
 	Connection con = null;
 	Statement stmt = null;  
@@ -102,6 +102,27 @@ public class Db
 			e.printStackTrace();
 		}
 		
+	}
+	
+	String getPrice(String title)
+	{
+		String price = "";
+		try
+		{
+			String sql = "select * from db_book where title = '" + title + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next())
+			{
+				price = rs.getString("price");
+			}
+			System.out.println("getPrice ok");
+			stmt.close(); con.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return price;
 	}
 	
 	void del(String d)

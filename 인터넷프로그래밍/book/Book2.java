@@ -7,7 +7,7 @@ public class Book2 extends JFrame
 {
 	JLabel la1,la2,la3,la4;
 	JTextField tf1,tf2,tf3;
-	JButton b1,b2;
+	JButton b1,b2,b3;
 	JComboBox<String> c;
 	
 	Book2()
@@ -42,6 +42,16 @@ public class Book2 extends JFrame
 			}
 		});
 		
+		b3 = new JButton("종료");
+		b3.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+		});
+		
 		JPanel p1=new JPanel(); p1.setLayout(new FlowLayout());
 		p1.add(la1); p1.add(c);
 		
@@ -61,9 +71,9 @@ public class Book2 extends JFrame
 		p6.add("North",p1); p6.add("Center",p2); p6.add("South",p3);
 		
 		this.setLayout(new BorderLayout());
-		this.add("North",p6);
+		this.add("North", p6);
 		this.add("Center", p4);
-		this.add("South",p5);
+		this.add("South", p5);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(400,300); this.setVisible(true); //무조건 보여줘라
 	}
