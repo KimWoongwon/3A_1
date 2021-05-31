@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Book5 extends JFrame  
+public class Book5 extends JFrame implements ActionListener
 {
 	JLabel la1,la2,la3,la4; 
 	JRadioButton cb1,cb2,cb3;
@@ -44,6 +44,7 @@ public class Book5 extends JFrame
 		p.add(cb1); p.add(cb2);p.add(cb3);
 		
 		b1=new JButton("»Æ¿Œ");
+		b1.addActionListener(this);
 		
 		JPanel p1=new JPanel(); p1.setLayout(new FlowLayout());
 		p1.add(la1);
@@ -78,6 +79,28 @@ public class Book5 extends JFrame
 		
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if(li.getSelectedIndex() != -1)
+		{
+			String jang = (String)c.getSelectedItem();
+			String title = (String)li.getSelectedValue();
+			String day;
+			if(cb1.isSelected())
+				day = "3";
+			else if(cb2.isSelected())
+				day = "5";
+			else
+				day = "7";
+			
+			new Book6(id, jang, title, day);
+			System.out.println("send to book6 : " +id+","+jang+","+title+","+day);
+			this.setVisible(false);
+		}
+		
+	}
+	
 	class Ck implements ItemListener
 	{
 		@Override
@@ -98,6 +121,7 @@ public class Book5 extends JFrame
 			}
 		}
 	}
+	
 	
 	public static void main(String[] args) 
 	{

@@ -5,27 +5,29 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class Book6 extends JFrame 
+public class Book6 extends JFrame implements ActionListener
 {
 	JLabel la1,la2,la3;
 	JButton b1,b2;
-	String id,t,b,d;
+	String id,j,t,d;
 	
-	Book6(String id, String t, String b, String d)
+	Book6(String id, String j, String t, String d)
 	{
 		super(id+"님");
 		
-		this.id=id; 
-		this.t=t; 
-		this.b=b; 
-		this.d=d;
+		this.id=id; this.j=j; this.t=t; this.d=d;
 		
-		la1=new JLabel("책이름 :"+b);
-		la2=new JLabel("대여기간:"+d);
-		la3=new JLabel("금액 "+t);
+		String price = new Db().getPrice(t);
+		int total = Integer.parseInt(price) * Integer.parseInt(d);
+		
+		la1=new JLabel("책이름 	: " + t);
+		la2=new JLabel("대여기간	: " + d);
+		la3=new JLabel("금액		: " + total);
 		
 		b1=new JButton("확인");
+		b1.addActionListener(this);
 		b2=new JButton("수정하기");
+		b2.addActionListener(this);
 		
 		JPanel p1=new JPanel(); p1.setLayout(new FlowLayout());
 		p1.add(la1);
@@ -47,6 +49,23 @@ public class Book6 extends JFrame
 		this.add("Center", p4);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(400,300); this.setVisible(true); //무조건 보여줘라
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		JButton bb = (JButton)e.getSource();
+		if(bb.equals(b1))
+		{
+			new Book8(id);
+			this.setVisible(false);
+		}
+		else
+		{
+			new Book7(id, j, t, d);
+			this.setVisible(false);
+		}
 		
 	}
 	
