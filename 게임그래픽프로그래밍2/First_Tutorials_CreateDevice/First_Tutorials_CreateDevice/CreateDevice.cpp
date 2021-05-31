@@ -8,6 +8,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
 #include <d3d9.h>
+#include <d3dx9.h>
+#include <Windows.h>
+#include <Windowsx.h>
 #pragma warning( disable : 4996 ) // disable deprecated warning 
 #include <strsafe.h>
 #pragma warning( default : 4996 )
@@ -20,6 +23,14 @@
 //-----------------------------------------------------------------------------
 LPDIRECT3D9         g_pD3D = NULL; // Used to create the D3DDevice
 LPDIRECT3DDEVICE9   g_pd3dDevice = NULL; // Our rendering device
+
+LPDIRECT3DVERTEXBUFFER9 g_pVB = NULL;
+LPDIRECT3DINDEXBUFFER9 g_pIB = NULL;
+
+struct MYINDEX
+{
+    WORD _0, _1, _2;
+};
 
 
 
